@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
   imageUrl: { type: String, required: true },
   cartItems: {
     type: Object, default: {
-    
-  }},
+      
+    }},
 }, { minimize: false });
 
 const user = mongoose.models.User || mongoose.model("User", userSchema);
