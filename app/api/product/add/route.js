@@ -4,6 +4,8 @@ import connectDB from '@/config/db';
 import Product from '@/models/Product';
 import { getAuth } from '@clerk/nextjs/server';
 import authSeller from '@/lib/authSeller';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Validate environment variables
 const requiredEnvVars = [
@@ -168,7 +170,7 @@ export const POST = async request => {
       );
       throw new Error(`Database error: ${dbError.message}`);
     }
-
+   
     return NextResponse.json(
       {
         success: true,
@@ -208,3 +210,5 @@ export const config = {
     },
   },
 };
+
+
