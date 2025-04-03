@@ -24,7 +24,17 @@ export const AppContextProvider = props => {
   const [cartItems, setCartItems] = useState({});
 
   const fetchProductData = async () => {
-    setProducts(productsDummyData || []);
+    try {
+      const { data } = await axios.get('/api/product/list');
+      if (data?.success) {
+        setProducts(data.data || []);
+      } else {
+        toast.error(data?.message || 'Failed to fetch products');
+      }
+    } catch (error) {
+      toast.error(error?.message || 'An error occurred');
+      setProducts(productsDummyData || []);
+    }
   };
 
   const fetchUserData = async () => {
@@ -125,3 +135,4 @@ export const AppContextProvider = props => {
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   );
 };
+

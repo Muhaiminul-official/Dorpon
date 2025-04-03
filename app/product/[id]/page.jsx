@@ -35,7 +35,7 @@ const Product = () => {
                 <div className="px-5 lg:px-16 xl:px-20">
                     <div className="rounded-lg overflow-hidden bg-gray-500/10 mb-4">
                         <Image
-                            src={mainImage || productData.image[0]}
+                            src={mainImage || productData.image[0].url}
                             alt="alt"
                             className="w-full h-auto object-cover mix-blend-multiply"
                             width={1280}
@@ -47,11 +47,11 @@ const Product = () => {
                         {productData.image.map((image, index) => (
                             <div
                                 key={index}
-                                onClick={() => setMainImage(image)}
+                                onClick={() => setMainImage(image.url)}
                                 className="cursor-pointer rounded-lg overflow-hidden bg-gray-500/10"
                             >
                                 <Image
-                                    src={image}
+                                    src={image.url}
                                     alt="alt"
                                     className="w-full h-auto object-cover mix-blend-multiply"
                                     width={1280}
