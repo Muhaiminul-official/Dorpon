@@ -13,11 +13,10 @@ const connectDB = async () => {
     const opts = {
       bufferCommands: false,
     };
-    cached.promise = mongoose.connect(process.env.MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
-    cached.conn = await cached.promise;
-    return cached.conn;
+    cached.promise = mongoose.connect(`${process.env.MONGODB_URI}/dorpon`, opts.then((mongoose) => mongoose));
+    
   }
+  cached.conn = await cached.promise;
+  return cached.conn;
 }
 export default connectDB
