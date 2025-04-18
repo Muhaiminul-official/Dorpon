@@ -1,6 +1,6 @@
 import { Inngest } from 'inngest';
 import connectDB from './db';
-import { User } from '@clerk/nextjs/dist/types/server';
+import { User } from '@clerk/nextjs/server';
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: 'DORPON' });
