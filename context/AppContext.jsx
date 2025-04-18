@@ -61,13 +61,33 @@ export const AppContextProvider = props => {
     }
   };
 
-  const addToCart = itemId => {
+  const addToCart = async itemId => {
     if (!itemId) return;
     setCartItems(prevCartItems => {
       const cartData = { ...prevCartItems };
       cartData[itemId] = (cartData[itemId] || 0) + 1;
       return cartData;
     });
+    toast.success("Product added to cart");
+    if (user) {
+      try {
+        const token = await getToken();
+        await axios.post(
+          '/api/cart/add',
+          { productId: itemId },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        toast.success('Product added to cart');
+      } catch (error) {
+        toast.error(error?.message || 'Failed to add product to cart');
+        console.error(error);
+      }
+    } else {
+      toast.success('Product added to cart'); // For guest/local-only cart
+    }
+
   };
 
   const updateCartQuantity = (itemId, quantity) => {
